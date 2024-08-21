@@ -1,6 +1,6 @@
 # C-Language Classwork Repository
 
-Welcome to the C-Language Classwork repository for the UCA batch. This repository contains various C programming assignments, projects, and exercises completed as part of our coursework. 
+Welcome to the C-Language Classwork repository for our batch. This repository contains various C programming assignments, projects, and exercises completed as part of our coursework. 
 
 ## Contents
 
