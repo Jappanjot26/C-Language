@@ -73,4 +73,48 @@ int main(int argc, char *argv[]){
 
     getch();
 
+for(nodelay(stdscr, 1); !fin; usleep(4000)){
+
+        if(++cont % 16 == 0){
+
+            if((b.y == ROW - 1) || (b.y) == 1){
+                b.moveV = !b.moveV;
+            }
+
+            if((b.x >= COL - 2) || (b.x <= 2)){
+                b.moveH = !b.moveH;
+
+                if((b.y == ball1.y - 1) || (b.y == ball2.y - 1)){
+ 
+                   b.moveV = FALSE;
+
+                } else if((b.y == ball1.y + 1) || (b.y == ball2.y + 1)){
+                    
+                    b.moveV = TRUE;
+
+                } else if((b.y != ball1.y) && (b.y != ball2.y)){
+
+                    (b.x >= COL - 2) ? ball1.c++ : ball2.c++;
+                    
+                    b.x = COL / 2;
+                    b.y = ROW / 2;
+                }   
+            }
+
+            b.x = b.moveH ? b.x + 1 : b.x - 1;
+            b.y = b.moveV ? b.y + 1 : b.y - 1;
+
+            // for paddle to appear from other end
+            if(ball1.y <= 1) ball1.y = ROW - 2;
+        
+            if(ball1.y >= ROW - 1) ball1.y = 2;
+        
+            if(ball2.y <= 1) ball2.y = ROW - 2;
+        
+            if(ball2.y >= ROW - 1) ball2.y = 2;
+        }
+
+    }
+    return 0;
 } 
+
