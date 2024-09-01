@@ -114,6 +114,54 @@ for(nodelay(stdscr, 1); !fin; usleep(4000)){
             if(ball2.y >= ROW - 1) ball2.y = 2;
         }
 
+        // Handling user input
+        switch (getch())
+        {
+            // Exits Game
+            case 'q': 
+            case 'Q':
+            case 0x1B:
+                endwin();
+                fin++;
+                break;
+
+            // left paddle
+            case 'a':
+            case 'A':
+                ball2.y--;
+                break;
+
+            case 'z':
+            case 'Z':
+                ball2.y++;
+                break;
+            
+            // right paddle
+            case KEY_UP:
+                ball1.y--;
+                break;
+            
+            case KEY_DOWN:
+                ball1.y++;
+                break;
+
+            // pauses the game
+            case 'p':
+                getchar();
+                break;
+        } 
+
+        // Score Display
+        if(ball1.c < 10){
+
+            mvprintw(2, COL / 2 - 3, "%i | %i", ball1.c, ball2.c);
+        
+        } else {
+            
+            mvprintw(2, COL / 2 - 4, "%i | %i", ball1.c, ball2.c);
+       
+        }
+
     }
     return 0;
 } 
