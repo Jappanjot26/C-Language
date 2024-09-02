@@ -3,10 +3,44 @@
 #include <time.h>
 
 static int ROW, COL; 
+void ball(int y, int x, int flag){
 
-int ball(int y, int x, int flag);
-int paddle(int y, int x, int flag);
-void field();
+    // To draw and erase the ball
+    if(!flag) 
+        mvaddch(y, x, ' '),
+        mvaddch(y, x + 1,' ');
+    else 
+        mvaddch(y, x, ACS_CKBOARD),
+        mvaddch(y, x + 1, ACS_CKBOARD);
+
+}
+
+void paddle(int y, int x, int flag){
+
+    // to draw and erase the paddle
+    int i;
+    if(!flag){
+        for(i = 0; i < 5; i++){
+            ball(y + i, x, 0);
+        }
+    }
+    else {
+        for(i = 0; i < 5; i++){
+            ball(y + i, x, 1);
+        }
+    }
+}
+
+void field(){
+
+    // to draw field separator for starting window
+    int i;
+    for(i = 0; i <= ROW; i++){
+        if(!(i % 2)){
+            ball(i, COL / 2 - 2, 1);
+        }
+    }
+}
 
 typedef struct {
 
@@ -160,6 +194,19 @@ for(nodelay(stdscr, 1); !fin; usleep(4000)){
             
             mvprintw(2, COL / 2 - 4, "%i | %i", ball1.c, ball2.c);
        
+        }
+
+        mvvline(0, COL / 2 - 1, ACS_VLINE, ROW);
+        mvaddch(b.y, b.x - 1, ACS_CKBOARD);
+        mvaddch(b.y, b.x, ACS_CKBOARD);
+
+        for(i = -2; i < 3; i++){
+
+            mvaddch(ball1.y + i, ball1.x - 1, ACS_CKBOARD);
+            mvaddch(ball1.y + i, ball1.x, ACS_CKBOARD);
+
+            mvaddch(ball2.y + i, ball2.x + 1, ACS_CKBOARD);
+            mvaddch(ball2.y + i, ball2.x, ACS_CKBOARD);
         }
 
     }
