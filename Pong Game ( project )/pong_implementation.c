@@ -2,7 +2,6 @@
 #include <string.h>
 #include <time.h>
 
-static int ROW, COL;
 
 void ball(int y, int x, int flag){
 
@@ -33,7 +32,7 @@ void paddle(int y, int x, int flag){
 
 }
 
-void field(){
+void field(int ROW, int COL){
 
   int i;
   for (i = 0; i <= ROW; i++){
@@ -86,7 +85,7 @@ void handleInput(bool *fin, obj *ball1, obj *ball2){
   }
 }
 
-void handlePositions(int *cont, obj *b, obj *ball1, obj *ball2){
+void handlePositions(int *cont, obj *b, obj *ball1, obj *ball2, int ROW, int COL){
 
   if (++(*cont) % 16 == 0){
 
@@ -95,13 +94,13 @@ void handlePositions(int *cont, obj *b, obj *ball1, obj *ball2){
     }
 
     if ((b->x >= COL - 2) || (b->x <= 2)){
-      
+
       b->moveH = !b->moveH;
 
       if ((b->y == ball1->y - 1) || (b->y == ball2->y - 1)){
         b->moveV = FALSE;
       }
-      
+
       else if ((b->y == ball1->y + 1) || (b->y == ball2->y + 1)){
         b->moveV = TRUE;
       }
@@ -119,19 +118,19 @@ void handlePositions(int *cont, obj *b, obj *ball1, obj *ball2){
 
     if (ball1->y <= 1)
       ball1->y = ROW - 2;
-    
+
     if (ball1->y >= ROW - 1)
       ball1->y = 2;
-    
+
     if (ball2->y <= 1)
       ball2->y = ROW - 2;
-    
+
     if (ball2->y >= ROW - 1)
       ball2->y = 2;
   }
 }
 
-void drawingElements(obj *b, obj *ball1, obj *ball2){
+void drawingElements(obj *b, obj *ball1, obj *ball2, int ROW, int COL){
 
   if (ball1->c < 10){
     mvprintw(2, COL / 2 - 3, "%i | %i", ball1->c, ball2->c);
@@ -157,69 +156,4 @@ void drawingElements(obj *b, obj *ball1, obj *ball2){
   }
 }
 
-int main(int argc, char *argv[]){
 
-  initscr();
-  keypad(stdscr, TRUE);
-  noecho();
-  cbreak();
-  curs_set(0);
-
-  srand((unsigned)time(0));
-
-  getmaxyx(stdscr, ROW, COL);
-  
-  start_color();
-
-  field();
-
-  paddle(ROW / 2 - 2, 2, 1);
-  paddle(ROW / 2 - 2, COL - 4, 1);
-
-  char msg1[] = "A and Z (left-paddle), Up and Down Arrow (right-paddle)";
-  char msg2[] = "Q, ESC - Quit, P - Pause the game";
-  char msg3[] = "<- Press any key ->";
-  char msg4[] = "Left player WON!";
-  char msg5[] = "Right player WON!";
-
-  init_pair(1, COLOR_RED, COLOR_BLACK);
-
-  attron(COLOR_PAIR(1));
-
-  attron(A_BOLD);
-
-  mvprintw(ROW / 2 - 8, (COL - strlen(msg1)) / 2, "%s", msg1);
-  mvprintw(ROW / 2 - 7, (COL - strlen(msg1)) / 2, "%s", msg1);
-
-  attron(A_BLINK);
-
-  mvprintw(ROW / 2 - 3, (COL - strlen(msg3)) / 2, "%s", msg3);
-
-  attroff(A_BLINK);
-  attroff(A_BOLD);
-  attroff(COLOR_PAIR(1));
-
-  obj scr;
-
-  int i, cont = 0;
-
-  bool fin = FALSE;
-  obj ball1 = {COL - 2, ROW / 2, 0, FALSE, FALSE},
-      ball2 = {1, ROW / 2, 0, FALSE, FALSE},
-      b = {COL / 2, ROW / 2, 0, FALSE, FALSE};
-
-  getch();
-
-  for (nodelay(stdscr, 1); !fin; usleep(4000)){
-
-    handlePositions(&cont, &b, &ball1, &ball2);
-
-    handleInput(&fin, &ball1, &ball2);
-
-    erase();
-
-    drawingElements(&b, &ball1, &ball2);
-  }
-  
-  return 0;
-}
