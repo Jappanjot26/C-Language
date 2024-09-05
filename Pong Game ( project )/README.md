@@ -6,39 +6,61 @@ This is an implementation of the classic Pong game using the `ncurses` library i
 
 ## Features
 
-- **Duel-player mode:** Play against your friend on the same keyboard.
-- **Smooth animation:** The game runs smoothly using the `ncurses` library for console-based graphics.
+- **Two-player mode:** Play against a friend on the same keyboard.
+- **Smooth animation:** The game runs smoothly using `ncurses` for console-based graphics.
 - **Controls:**
-  - **Left Paddle:** Use `A` (Up) and `Z` (Down) keys.
-  - **Right Paddle:** Use the `UP` and `DOWN` arrow keys.
-  - **Quit:** Press `Q` or `ESC` to quit the game.
+  - **Left Paddle (Player 1):** `A` (Up), `Z` (Down)
+  - **Right Paddle (Player 2):** `Up Arrow` (Up), `Down Arrow` (Down)
+  - **Pause/Resume:** Press `P` to pause or resume the game.
+  - **Quit:** Press `Ctrl + C` to quit.
 
 ## Requirements
 
 - **C Compiler:** You need a C compiler like `gcc`.
-- **ncurses Library:** Ensure that the `ncurses` library is installed on your system. You can install it on Ubuntu-based systems using:
-  ```bash
-  sudo apt-get install libncurses5-dev libncursesw5-dev
-  ```
-
-## Compilation and Running
-
-1. **Navigate to the Project Directory:**
+- **ncurses Library:** Install the `ncurses` library on your system. On Ubuntu, use:
    ```bash
-   cd C-Language/project
+   sudo apt-get install libncurses5-dev libncursesw5-dev
    ```
 
-2. **Compile the Code:**
+## Installation and Running
+
+**Clone the Repository:**
    ```bash
-   gcc -o pong pong.c -lncurses
+   git clone https://github.com/Jappanjot26/C-Language.git
    ```
 
-3. **Run the Game:**
+**Navigate to the Pong Game Directory:**
    ```bash
-   ./pong
+   cd C-Language/Pong\ Game\ \(\ project\ \)/
    ```
 
-## Future Work
+**Try Running the Pre-Compiled Output:**
+   ```bash
+   ./output
+   ```
 
-This is just the beginning! In the future, I plan to expand this project by adding more games implemented using the `ncurses` library. 
-Stay tuned!
+**If the `output` file doesn't work, follow these steps:**
+   1. Compile the implementation file:
+      ```bash
+      gcc -c pong_implementation.c -o pong_out
+      ```
+   2. Create a static library:
+      ```bash
+      ar rcs pong_library.a pong_out
+      ```
+   3. Compile the main program:
+      ```bash
+      gcc main.c -o output -L. pong_library.a -lncurses
+      ```
+   4. Run the program:
+      ```bash
+      ./output
+      ```
+      
+## Contact Me
+
+If you have any questions, suggestions, or feedback, feel free to reach out to me at:
+
+**Email:** singhjappanjot1@gmail.com  
+**LinkedIn:** [Jappanjot Singh](https://www.linkedin.com/in/jappanjot-singh-275440257)
+
