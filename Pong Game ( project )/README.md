@@ -56,6 +56,14 @@ This is an implementation of the classic Pong game using the `ncurses` library i
       ```bash
       ./output
       ```
+
+## Snapshots
+
+### Starting Screen
+![Starting Screen](img/start_screen.png)
+
+### Gameplay Screen
+![Gameplay](img/gameplay.png)
       
 ## Contact Me
 
