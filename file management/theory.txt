@@ -1,0 +1,72 @@
+File management in C:
+	Text Files (ASCII / UTF-8)
+		Stores in .txt
+	Binary Files (0-1)
+		Stores in .bin
+	
+FILE structure is used for file management, a derived data type as it is made using library.
+Looks like :
+	typedef struct _iobuf
+	{
+	    char*   _ptr;
+	    int _cnt;
+	    char*   _base;
+	    int _flag;
+	    int _file;
+	    int _charbuf;
+	    int _bufsiz;
+	    char*   _tmpfname;
+	} FILE;
+	
+	google it to learn more.
+	
+Leetcode ques: read 4 characters
+
+Below Functions is present in <stdio.h>
+
+Opening a file:
+	fopen(path, mode); ---- returns a address (just like malloc, calloc in void*)
+	so we need to convert it in FILE* 
+	
+	Modes:
+		r -- read only (file should exist else FILE* = NULL), puts pointer at start) 
+		w -- write (if exists, remove content and write) else create file and write)
+		a -- append (works as write but pointer is at end of file whereas write in start)
+		r+ -- opens in Read/Write (if file exists else error, point at start)
+		w+ -- opens in Read/Write (if file doesn't exits, creates one, point at start)
+		a+ -- opens in Read/Write (create file if not exists, points at end of file)
+		rb, wb, ab, rb+, wb+, ab+ -- these are modes for binary files, above for text files
+
+Closing a file: so that memory doesn't waste (imp. step)
+	fclose(FILE*), returns 0 - no error and FILE* not valid anymore
+			       any other - for some error.
+
+Get file's content:
+	fgets(char* str, int n, FILE* file) // (str, n, stream of data)
+	-- to read certain 'n' chars in file, returns Char* (generally, means str where data present) 
+	-- points in start of file
+	-- we say go upto n-1 (max) index and store characters in str, if not n - 1, returs what it is 
+	-- if data doesn't present return NULL ( for EOF )
+	-- fgetc(FILE*) - just gets one char
+
+Prints/ Write file contents:
+	fprintf(FILE*, "sample text - %d", num) -- we just specifies FILE* else it is printf 
+	HW 1 - how it return escaped characters
+
+Read file's content:
+	fscanf(FILE*, const char *format, ...) -- specify file to read from else syntax as scanf.
+	
+HW 2 - take input and store in binary, and take that text and convert it to text and display.
+HW 3 - how binary files actually store and what it display on read forcefully.
+
+( if we provide stdin for fscanf AND stdout for fprintf -- will works as scanf and printf )
+	
+EXTRA:
+	-- ssh (secure shell) make unique identity stored in file, puts in host to take permission.
+	   basically it is authentication technique( usually in cloud machines ).
+	   We dicussed it as it also includes modes.
+	-- When we provide input it stored in stdin file, so whenever we are printing something, it
+	   reads input form stdin and act upon it, hence we were using file management from start.
+	   means what we write in terminal goes in stdin.
+	   
+		
