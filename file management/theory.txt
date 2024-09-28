@@ -51,13 +51,15 @@ Get file's content:
 
 Prints/ Write file contents:
 	fprintf(FILE*, "sample text - %d", num) -- we just specifies FILE* else it is printf 
-	HW 1 - how it return escaped characters
+	-- when a escaped sequence is entered ('\n', '\t'), compiler changes to newline or tab 	
+	   character. 
 
 Read file's content:
 	fscanf(FILE*, const char *format, ...) -- specify file to read from else syntax as scanf.
 	
-HW 2 - take input and store in binary, and take that text and convert it to text and display.
-HW 3 - how binary files actually store and what it display on read forcefully.
+
+How binary files actually store and what it display on read forcefully?
+-- binary files are stored in raw bytes ( 1 byte = 8 bits), it shows random characters as when 8 bits are interpret, can be a value ranging from 0 to 255 in ASCII table and it will show corresponding character. 
 
 ( if we provide stdin for fscanf AND stdout for fprintf -- will works as scanf and printf )
 	
